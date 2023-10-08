@@ -1,0 +1,8 @@
+header {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(230,145,15,1) 46%, rgba(255,0,0,1) 100%);
+    color: white;
+    height: 10vh;
+}
+

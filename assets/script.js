@@ -1,7 +1,7 @@
 var searchBtn = $('.citySearchBtn');
 var citySearch = $('.citySearch');
 var cityList = $('.cityList');
-var cityHistory = [];
+var cityHistory = JSON.parse(localStorage.getItem("City Choice")) || [];
 
 
 function renderCity() {
@@ -48,6 +48,7 @@ $('.cityForm').on("submit", function(event) {
     renderCity();
 });
 
+renderCity();
 
 
 // searchBtn.on('click', function(event) {

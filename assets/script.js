@@ -10,7 +10,7 @@ function renderCity() {
     for (var i = 0; i < cityHistory.length; i++) {
         var city = cityHistory[i];
 
-        var li = $("<li></li>");
+        var li = $("<button></button>");
         li.text(city);
         li.attr("data-index", i);
 

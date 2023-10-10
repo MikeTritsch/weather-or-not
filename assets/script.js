@@ -1,6 +1,11 @@
+var searchBtn = $('.citySearchBtn');
+var citySearch = $('.citySearch');
+var cityList = $('.cityList');
+var cityHistory = JSON.parse(localStorage.getItem("City Choice")) || [];
+var apiKey = "4d4a164cfde95971ff68068cb1a1c7b9";
 
-function getApi() {
-    var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=Austin&units=imperial&appid=4d4a164cfde95971ff68068cb1a1c7b9`
+function getApi(cityLookUp) {
+    var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityLookUp}&units=imperial&appid=${apiKey}`
     fetch(requestUrl)
         .then(function (response) {
             return response.json();
@@ -8,22 +13,44 @@ function getApi() {
 
         .then(function (data) {
             console.log(data);
+            $('#currentDay').text(cityLookUp + ": " + dayjs().format('MM/DD/YY'));
             $('.mainCard').children().eq(1).append(data.list[0].main.temp);
             $('.mainCard').children().eq(2).append(data.list[0].wind.speed);
             $('.mainCard').children().eq(3).append(data.list[0].main.humidity);
-
         })
 };
 
-getApi();
+function fiveDay(lat, lon) {
+    var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+        })
 
-// NEED TO CHANGE TO DYNAMICALLY CHANGE
-$('#currentDay').text('Austin: ' + dayjs().format('MM/DD/YY'));
+        .then(function (data) {
+            console.log(data);
+            for (var i = 0; i < data.list.length; i+=8) {
+                console.log(data.list[i]);
+                // In the for loop, target the card that represents the day
+            }
+        })
+};
 
-var searchBtn = $('.citySearchBtn');
-var citySearch = $('.citySearch');
-var cityList = $('.cityList');
-var cityHistory = JSON.parse(localStorage.getItem("City Choice")) || [];
+function geoLocator(cityLookUp) {
+    var requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityLookUp}&limit=5&appid=${apiKey}`
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+        })
+
+        .then(function (data) {
+            console.log(data);
+            fiveDay(data[0].lat, data[0].lon)
+        })
+}
+
+
+
 
 
 function renderCity() {
@@ -68,6 +95,8 @@ $('.cityForm').on("submit", function(event) {
 
     storeCity();
     renderCity();
+    getApi(cityText);
+    geoLocator(cityText);
 });
 
 renderCity();
@@ -100,3 +129,8 @@ renderCity();
 //     var location = $('.citySearch').val();
 //     console.log(location);
 // }
+
+
+// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+
+// 30.26793198416416, -97.73721194336943

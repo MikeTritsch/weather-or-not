@@ -1,3 +1,19 @@
+
+function getApi() {
+    var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=Austin&units=imperial&appid=4d4a164cfde95971ff68068cb1a1c7b9`
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+        })
+
+        .then(function (data) {
+            console.log(data);
+            $('.mainCard').children().eq(0).text(data.list[0].main.temp);
+        })
+};
+
+getApi();
+
 var searchBtn = $('.citySearchBtn');
 var citySearch = $('.citySearch');
 var cityList = $('.cityList');
@@ -49,6 +65,9 @@ $('.cityForm').on("submit", function(event) {
 });
 
 renderCity();
+
+
+
 
 
 // searchBtn.on('click', function(event) {

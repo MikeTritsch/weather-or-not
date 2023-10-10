@@ -8,11 +8,17 @@ function getApi() {
 
         .then(function (data) {
             console.log(data);
-            $('.mainCard').children().eq(0).text(data.list[0].main.temp);
+            $('.mainCard').children().eq(1).append(data.list[0].main.temp);
+            $('.mainCard').children().eq(2).append(data.list[0].wind.speed);
+            $('.mainCard').children().eq(3).append(data.list[0].main.humidity);
+
         })
 };
 
 getApi();
+
+// NEED TO CHANGE TO DYNAMICALLY CHANGE
+$('#currentDay').text('Austin: ' + dayjs().format('MM/DD/YY'));
 
 var searchBtn = $('.citySearchBtn');
 var citySearch = $('.citySearch');

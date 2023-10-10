@@ -14,9 +14,9 @@ function getApi(cityLookUp) {
         .then(function (data) {
             console.log(data);
             $('#currentDay').text(cityLookUp + ": " + dayjs().format('MM/DD/YY'));
-            $('.mainCard').children().eq(1).append(data.list[0].main.temp);
-            $('.mainCard').children().eq(2).append(data.list[0].wind.speed);
-            $('.mainCard').children().eq(3).append(data.list[0].main.humidity);
+            $('.mainCard').children().eq(1).text('Temp: ' + data.list[0].main.temp + ' °F');
+            $('.mainCard').children().eq(2).text('Wind Speed: ' + data.list[0].wind.speed + ' mph');
+            $('.mainCard').children().eq(3).text('Humidity: ' + data.list[0].main.humidity + ' %');
         })
 };
 

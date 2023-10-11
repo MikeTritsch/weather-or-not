@@ -13,13 +13,6 @@ header {
     height: 10vh;
 }
 
-header h1{
-    font-size: 32px;
-    background: -webkit-linear-gradient(rgb(21, 186, 219), rgb(0, 0, 0));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
 input {
     border-radius: 10px;
     height: 50px;

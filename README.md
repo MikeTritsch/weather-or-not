@@ -2,12 +2,9 @@
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+The Weather Or Not App is a user-friendly and informative weather forecasting application that provides up-to-date weather information for the next five days. This app aims to help users plan their week by offering accurate weather forecasts with an intuitive and visually appealing user interface. I was motivated by a need to practice API calling, on top of building something productive and useful, to build this application.
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+Looking to plan trip somewhere and need to know what kind of weather you'll be working with? Start here!
 
 ## Links
 

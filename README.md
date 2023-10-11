@@ -25,14 +25,20 @@ N/A
 
 ## Usage
 
+![Demo](./assets/images/demo.gif)
+
 Upon the page loading, you will be met with a search input on the left side of the viewport.
 
 To find the current day weather along with a five day forcast for a specified global location, simply enter the CITY NAME in the search input.
+
+<img width="1508" alt="search" src="https://github.com/MikeTritsch/weather-or-not/assets/122573481/d01a97e0-921f-4b3b-bde9-195ae29b02c9">
 
 After clicking submit, your forecast and weather conditions will be presented to you.
 
 For each unique city searched, a button will appear on the left side column containing the searched city's name.
 These buttons serve as your search history and will stay bookmarked if you close or refresh the page.
+
+<img width="1507" alt="usage" src="https://github.com/MikeTritsch/weather-or-not/assets/122573481/46b41d0c-f810-48b5-bf1e-8dcbbb5090e6">
 
 Clicking these saved buttons will reload the weather conditions for that city.
 

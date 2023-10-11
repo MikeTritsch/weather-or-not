@@ -31,8 +31,17 @@ function fiveDay(lat, lon) {
             $('.fourDay').empty();
             for (var i = 0; i < data.list.length; i+=8) {
                 console.log(data.list[i]);
-                var temp = $('<h1></h1>').text('Temp: ' + data.list[i].main.temp);
+                var temp = $('<h4></h4>').text('Temp: ' + data.list[i].main.temp + ' °F');
+                var windSpeed = $('<h5></h5>').text('Wind Speed: ' + data.list[i].wind.speed + ' mph');
+                var humidity = $('<h6></h6>').text('Humidity: ' + data.list[i].main.humidity + '%');
+                var time = $('<h3></h3>').text(data.list[i].dt_txt);
+
+                $('.fourDay').append(time);
                 $('.fourDay').append(temp);
+                $('.fourDay').append(windSpeed);
+                $('.fourDay').append(humidity);
+
+
                 // In the for loop, target the card that represents the day
             }
         })
@@ -50,9 +59,6 @@ function geoLocator(cityLookUp) {
             fiveDay(data[0].lat, data[0].lon)
         })
 }
-
-
-
 
 
 function renderCity() {

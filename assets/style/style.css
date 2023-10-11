@@ -1,16 +1,24 @@
 header {
     text-align: center;
     padding: 20px;
-    color: white;
     height: 10vh;
-}
-
-body {
-    background: linear-gradient(120deg, rgba(2,0,36,1) 0%, rgba(230,145,15,1) 46%, rgba(255,0,0,1) 100%);
 }
 
 .fourDay h6{
     border-bottom: solid black 2px;
+}
+
+.cardDiv {
+    background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgba(230,145,15,1) 46%, rgba(255,0,0,1) 100%);
+    padding: 10px;
+}
+
+.searchMsg {
+    display: flex;
+}
+
+.mainCard {
+    border-bottom: 2px solid black;
 }
 
 

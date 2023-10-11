@@ -8,18 +8,20 @@ $(document).ready(function() {
 
 
 function getApi(cityLookUp) {
-    var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityLookUp}&units=imperial&appid=${apiKey}`
+    var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityLookUp}&units=imperial&appid=${apiKey}`
     fetch(requestUrl)
         .then(function (response) {
             return response.json();
         })
 
         .then(function (data) {
+            
             console.log(data);
             $('#currentDay').text(cityLookUp + ": " + dayjs().format('MM/DD/YY'));
-            $('.mainCard').children().eq(1).text('Temp: ' + data.list[0].main.temp + ' °F');
-            $('.mainCard').children().eq(2).text('Wind Speed: ' + data.list[0].wind.speed + ' mph');
-            $('.mainCard').children().eq(3).text('Humidity: ' + data.list[0].main.humidity + '%');
+            $('.mainCard').children().eq(1).attr("src", `https://openweathermap.org/img/w/${data.weather[0].icon}.png`)
+            $('.mainCard').children().eq(2).text('Temp: ' + data.main.temp + ' °F');
+            $('.mainCard').children().eq(3).text('Wind Speed: ' + data.wind.speed + ' mph');
+            $('.mainCard').children().eq(4).text('Humidity: ' + data.main.humidity + '%');
         })
 };
 
@@ -32,16 +34,19 @@ function fiveDay(lat, lon) {
 
         .then(function (data) {
             $('.fourDay').empty();
-            for (var i = 0; i < data.list.length; i+=8) {
+            for (var i = 6; i < data.list.length; i+=8) {
                 console.log(data.list[i]);
                 var comingUp = $('<h3></h3>').text('Coming up...');
                 var temp = $('<h4></h4>').text('Temp: ' + data.list[i].main.temp + ' °F');
                 var windSpeed = $('<h5></h5>').text('Wind Speed: ' + data.list[i].wind.speed + ' mph');
                 var humidity = $('<h6></h6>').text('Humidity: ' + data.list[i].main.humidity + '%');
-                var time = $('<h3></h3>').text(data.list[i].dt_txt);
+                var time = $('<h3></h3>').text(dayjs.unix(data.list[i].dt).format("MM/DD/YY"));
+                var icon = $('<img>')
+                icon.attr("src", `https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`);
 
                 $('.fourDay').append(comingUp);
                 $('.fourDay').append(time);
+                $('.fourDay').append(icon);
                 $('.fourDay').append(temp);
                 $('.fourDay').append(windSpeed);
                 $('.fourDay').append(humidity);
@@ -73,25 +78,11 @@ function renderCity() {
         var city = cityHistory[i];
 
         var li = $("<button></button>");
+        li.addClass("historyBtn");
         li.text(city);
-        li.attr("data-index", i);
 
         $('.cityList').append(li);
     }
-}
-
-function initCity() {
-    var storedCity = JSON.parse(localStorage.getItem("City Choice"));
-
-    if (storedCity !== null) {
-        cityHistory = storedCity;
-    }
-
-    renderCity();
-}
-
-function storeCity() {
-    localStorage.setItem("City Choice", JSON.stringify(cityHistory));
 }
 
 
@@ -103,19 +94,29 @@ $('.cityForm').on("submit", function(event) {
     if (cityText === ""){
         return;
     }
-
-    cityHistory.push(cityText);
-
-    storeCity();
-    renderCity();
+    localHistory(cityText);
     getApi(cityText);
     geoLocator(cityText);
 });
 
 renderCity();
 
-});
+function localHistory(cityText) {
+    if (cityHistory.indexOf(cityText)!== -1) return;
 
+    cityHistory.push(cityText);
+    localStorage.setItem("City Choice", JSON.stringify(cityHistory));
+    renderCity();
+};
+
+
+$('.cityList').on("click", ".historyBtn", function(e) {
+    var city = $(this).text();
+    getApi(city);
+    geoLocator(city);
+})
+
+});
 
 // searchBtn.on('click', function(event) {
 //     event.preventDefault()

@@ -36,7 +36,6 @@ function fiveDay(lat, lon) {
             $('.fourDay').empty();
             for (var i = 6; i < data.list.length; i+=8) {
                 console.log(data.list[i]);
-                var comingUp = $('<h3></h3>').text('Coming up...');
                 var temp = $('<h4></h4>').text('Temp: ' + data.list[i].main.temp + ' °F');
                 var windSpeed = $('<h5></h5>').text('Wind Speed: ' + data.list[i].wind.speed + ' mph');
                 var humidity = $('<h6></h6>').text('Humidity: ' + data.list[i].main.humidity + '%');
@@ -44,7 +43,7 @@ function fiveDay(lat, lon) {
                 var icon = $('<img>')
                 icon.attr("src", `https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`);
 
-                $('.fourDay').append(comingUp);
+
                 $('.fourDay').append(time);
                 $('.fourDay').append(icon);
                 $('.fourDay').append(temp);

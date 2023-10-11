@@ -16,28 +16,30 @@ function getApi(cityLookUp) {
             $('#currentDay').text(cityLookUp + ": " + dayjs().format('MM/DD/YY'));
             $('.mainCard').children().eq(1).text('Temp: ' + data.list[0].main.temp + ' °F');
             $('.mainCard').children().eq(2).text('Wind Speed: ' + data.list[0].wind.speed + ' mph');
-            $('.mainCard').children().eq(3).text('Humidity: ' + data.list[0].main.humidity + ' %');
+            $('.mainCard').children().eq(3).text('Humidity: ' + data.list[0].main.humidity + '%');
         })
 };
 
 function fiveDay(lat, lon) {
-    var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
+    var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
     fetch(requestUrl)
         .then(function (response) {
             return response.json();
         })
 
         .then(function (data) {
-            console.log(data);
+            $('.fourDay').empty();
             for (var i = 0; i < data.list.length; i+=8) {
                 console.log(data.list[i]);
+                var temp = $('<h1></h1>').text('Temp: ' + data.list[i].main.temp);
+                $('.fourDay').append(temp);
                 // In the for loop, target the card that represents the day
             }
         })
 };
 
 function geoLocator(cityLookUp) {
-    var requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityLookUp}&limit=5&appid=${apiKey}`
+    var requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityLookUp}&limit=1&appid=${apiKey}`
     fetch(requestUrl)
         .then(function (response) {
             return response.json();

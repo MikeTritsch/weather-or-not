@@ -8,11 +8,15 @@ Looking to plan trip somewhere and need to know what kind of weather you'll be w
 
 ## Links
 
-Deployed Application
+[Deployed App](https://miketritsch.github.io/weather-or-not/)
 
-GitHub Repo
+[GitHub Repo](https://github.com/MikeTritsch/weather-or-not)
 
 ## What comes next? and other issues...
+
+This challenge tested my overall knowledge of everything I have learned up to this point. This is my first time working with a serverside API, and I learned how to read documentation as well as draw connections between the code and the API parameters.
+
+I would have liked to see my forecast displayed in individual cards, rather than in a row based format. I am going to continue to work on planning out functions and consolidating my code. I have a lot of individual functions within my JavaScript file, and I'd like to work on chaining these or consolidating them in some way.
 
 
 ## Installation
@@ -21,6 +25,16 @@ N/A
 
 ## Usage
 
+Upon the page loading, you will be met with a search input on the left side of the viewport.
+
+To find the current day weather along with a five day forcast for a specified global location, simply enter the CITY NAME in the search input.
+
+After clicking submit, your forecast and weather conditions will be presented to you.
+
+For each unique city searched, a button will appear on the left side column containing the searched city's name.
+These buttons serve as your search history and will stay bookmarked if you close or refresh the page.
+
+Clicking these saved buttons will reload the weather conditions for that city.
 
 ## Credits
 

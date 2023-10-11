@@ -4,6 +4,9 @@ var cityList = $('.cityList');
 var cityHistory = JSON.parse(localStorage.getItem("City Choice")) || [];
 var apiKey = "4d4a164cfde95971ff68068cb1a1c7b9";
 
+$(document).ready(function() {
+
+
 function getApi(cityLookUp) {
     var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityLookUp}&units=imperial&appid=${apiKey}`
     fetch(requestUrl)
@@ -111,8 +114,7 @@ $('.cityForm').on("submit", function(event) {
 
 renderCity();
 
-
-
+});
 
 
 // searchBtn.on('click', function(event) {

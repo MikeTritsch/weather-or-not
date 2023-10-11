@@ -1,5 +1,10 @@
+/* Variables */
 :root {
     --main-gradient: linear-gradient(90deg, rgb(21, 186, 219) 0%, rgb(255, 255, 255) 46%, rgb(255, 255, 255) 100%);
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
 }
 
 header {
@@ -8,9 +13,21 @@ header {
     height: 10vh;
 }
 
-.fourDay h6{
-    border-bottom: solid black 4px;
-    padding-bottom: 10px;
+input {
+    border-radius: 10px;
+    height: 50px;
+}
+
+.cityList button{
+    background: var(--main-gradient);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.mainCard {
+    border-bottom: 4px solid black;
+    color: white;
 }
 
 .cardDiv {
@@ -20,19 +37,11 @@ header {
     border-radius: 10px;
 }
 
+.fourDay h6{
+    border-bottom: solid black 4px;
+    padding-bottom: 10px;
+}
+
 .searchMsg {
     display: flex;
-}
-
-.mainCard {
-    border-bottom: 4px solid black;
-    color: white;
-}
-
-
-.cityList button{
-    background: var(--main-gradient);
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
 }

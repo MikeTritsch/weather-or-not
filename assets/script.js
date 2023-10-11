@@ -1,12 +1,11 @@
-var searchBtn = $('.citySearchBtn');
-var citySearch = $('.citySearch');
-var cityList = $('.cityList');
+// Global Variables
 var cityHistory = JSON.parse(localStorage.getItem("City Choice")) || [];
 var apiKey = "4d4a164cfde95971ff68068cb1a1c7b9";
 
+// JQuery Docu-ready Function
 $(document).ready(function() {
 
-
+// Current Weather API Call
 function getApi(cityLookUp) {
     var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityLookUp}&units=imperial&appid=${apiKey}`
     fetch(requestUrl)
@@ -25,6 +24,7 @@ function getApi(cityLookUp) {
         })
 };
 
+// Five Day API Call
 function fiveDay(lat, lon) {
     var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
     fetch(requestUrl)
@@ -43,19 +43,16 @@ function fiveDay(lat, lon) {
                 var icon = $('<img>')
                 icon.attr("src", `https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`);
 
-
                 $('.fourDay').append(time);
                 $('.fourDay').append(icon);
                 $('.fourDay').append(temp);
                 $('.fourDay').append(windSpeed);
                 $('.fourDay').append(humidity);
-
-
-                // In the for loop, target the card that represents the day
             }
         })
 };
 
+// Geolocation API Call
 function geoLocator(cityLookUp) {
     var requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityLookUp}&limit=1&appid=${apiKey}`
     fetch(requestUrl)
@@ -69,7 +66,7 @@ function geoLocator(cityLookUp) {
         })
 }
 
-
+// Appends searched city/history list to page
 function renderCity() {
     $('.cityList').text("");
 
@@ -84,15 +81,17 @@ function renderCity() {
     }
 }
 
-
+// Event listener tied to the city search submittal
 $('.cityForm').on("submit", function(event) {
     event.preventDefault();
+    // Hides "search to start" message
     $('.searchMsg').hide();
     var cityText = $('.citySearch').val();
 
     if (cityText === ""){
         return;
     }
+    // Runs localStorage functions and the API calls
     localHistory(cityText);
     getApi(cityText);
     geoLocator(cityText);
@@ -100,6 +99,7 @@ $('.cityForm').on("submit", function(event) {
 
 renderCity();
 
+// Prevents button history from repeating values
 function localHistory(cityText) {
     if (cityHistory.indexOf(cityText)!== -1) return;
 
@@ -108,7 +108,7 @@ function localHistory(cityText) {
     renderCity();
 };
 
-
+// Gives the localStorage buttons functionality
 $('.cityList').on("click", ".historyBtn", function(e) {
     var city = $(this).text();
     getApi(city);
@@ -116,33 +116,3 @@ $('.cityList').on("click", ".historyBtn", function(e) {
 })
 
 });
-
-// searchBtn.on('click', function(event) {
-//     event.preventDefault()
-//     var location = $('.citySearch').val();
-//     console.log(location);
-
-//     storeCity();
-//     renderCity();
-
-
-
-
-
-// function renderCity() {
-//     var cityStored = JSON.parse(localStorage.getItem("City Choice"));
-//     var cityDiv = $('.cityDiv');
-//     var newButton = $('<button></button>').text(cityStored);
-//     cityDiv.children().eq(2).append(newButton);
-// };
-
-
-// function getApi() {
-//     var location = $('.citySearch').val();
-//     console.log(location);
-// }
-
-
-// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-
-// 30.26793198416416, -97.73721194336943

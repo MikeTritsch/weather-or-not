@@ -15,7 +15,6 @@ function getApi(cityLookUp) {
 
         .then(function (data) {
             
-            console.log(data);
             $('#currentDay').text(cityLookUp + ": " + dayjs().format('MM/DD/YY'));
             $('.mainCard').children().eq(1).attr("src", `https://openweathermap.org/img/w/${data.weather[0].icon}.png`)
             $('.mainCard').children().eq(2).text('Temp: ' + data.main.temp + ' °F');
@@ -35,7 +34,6 @@ function fiveDay(lat, lon) {
         .then(function (data) {
             $('.fourDay').empty();
             for (var i = 6; i < data.list.length; i+=8) {
-                console.log(data.list[i]);
                 var temp = $('<h4></h4>').text('Temp: ' + data.list[i].main.temp + ' °F');
                 var windSpeed = $('<h5></h5>').text('Wind Speed: ' + data.list[i].wind.speed + ' mph');
                 var humidity = $('<h6></h6>').text('Humidity: ' + data.list[i].main.humidity + '%');
@@ -61,7 +59,6 @@ function geoLocator(cityLookUp) {
         })
 
         .then(function (data) {
-            console.log(data);
             fiveDay(data[0].lat, data[0].lon)
         })
 }
